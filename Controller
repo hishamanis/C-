@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+#include <thread>
+#include <chrono>
+
+// Mock functions for hardware interaction
+bool readButton(int pin) {
+    // Replace with actual GPIO read logic
+    // Return true if button is pressed
+    return false;
+}
+
+void displayText(const std::string& text) {
+    // Replace with your actual 7-segment rendering logic
+    std::cout << "Displaying: " << text << std::endl;
+}
+
+int main() {
+    const int BUTTON1_PIN = 2; // Example pin for first button
+    const int BUTTON2_PIN = 3; // Example pin for second button
+
+    const std::string firstName = "Hish";   // Replace with your first name
+    const std::string secondName = "Anis";   // Replace with your second name
+
+    std::string currentDisplay = "";
+
+    while (true) {
+        if (readButton(BUTTON1_PIN)) {
+            if (currentDisplay != firstName) {
+                displayText(firstName);
+                currentDisplay = firstName;
+            }
+        }
+        else if (readButton(BUTTON2_PIN)) {
+            if (currentDisplay != secondName) {
+                displayText(secondName);
+                currentDisplay = secondName;
+            }
+        }
+
+        // Small delay to avoid busy looping
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+    return 0;
+}
