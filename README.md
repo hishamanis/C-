@@ -1,2 +1,2 @@
-# C-
+# C++
 MicroController in C++
